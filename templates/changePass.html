@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ url_for('static',filename ='css/style.css')}}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<style>
+
+</style>
+</head>
+<body>
+
+    <div class="topnav" id="myTopnav">
+        <a href="{{url_for('viewClass')}}" style ="text-decoration: none;color:bisque">View Classroom</a>
+        <a href="{{url_for('enter')}}" style ="text-decoration: none;color:bisque">Enter a Classroom</a>
+        <a href="{{url_for('exit')}}" style ="text-decoration: none;color:bisque">Exit Classroom</a>
+        <a href="{{url_for('usage')}}" style ="text-decoration: none;color:bisque">Classroom Usage</a>
+        <a href="{{url_for('changePass')}}" style ="text-decoration: none;color:bisque">Password Change</a>
+        
+        <a href="{{url_for('user_logout')}}" style ="text-decoration: none;color:bisque">Logout</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+<br>      
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+    {% for msg in messages %}
+    <div class="alert alert-primary" role="alert">
+       {{msg}}
+    </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<br>
+<p style="text-align: center;" class="heading">Change password</p>
+<div class="container" style="text-align: center;margin: 70px 10px;background-color: grey;">
+   
+    <br>
+  <form method="POST" action="/changePass">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname" style="color:bisque" ><b>Enter Old Password</b></label>
+      </div>
+      <div class="col-75">
+        <input type="string" class="form-control" name="oldPass" style="padding:3px ;">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname" style="color:bisque"><b>Enter New Password</b></label>
+      </div>
+      <div class="col-75">
+        <input type="string" class="form-control" name="newPass" style="padding:3px">
+      </div>
+    </div>
+    <br>
+    <button type="submit" style="padding:3px;background-color: #04AA6D;">Submit</button>
+    </div>
+  </form>
+</div>
+
+<script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    </script>
+</body>
+</html>

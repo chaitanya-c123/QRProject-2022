@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ url_for('static',filename ='css/style.css')}}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="topnav" id="myTopnav">
+    <a href="{{url_for('viewClass')}}" style ="text-decoration: none;color:bisque">View Classroom</a>
+    <a href="{{url_for('enter')}}" style ="text-decoration: none;color:bisque">Enter a Classroom</a>
+    <a href="{{url_for('exit')}}" style ="text-decoration: none;color:bisque">Exit Classroom</a>
+    <a href="{{url_for('usage')}}" style ="text-decoration: none;color:bisque">Classroom Usage</a>
+    <a href="{{url_for('changePass')}}" style ="text-decoration: none;color:bisque">Password Change</a>
+    
+    <a href="{{url_for('user_logout')}}" style ="text-decoration: none;color:bisque">Logout</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+  <br><br>
+  <p style="text-align:center;" class="heading">Classroom Entries</p>
+  <br><br>
+
+<div class="container">
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Email Id</th>
+        <th scope="col">Room_number</th>
+        <th scope="col">In Time</th>
+        <th scope="col">Exit Time</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      {%for ele in users%}
+      <tr  style="font-weight: 500;">
+        <td scope="row">{{ele.email}}</td>
+        <td scope="row">{{ele.room_number}}</td>
+        <td scope="row">{{ele.in_t}}</td>
+        <td scope="row">{{ele.exit_t}}</td>
+        <td scope="row">{{ele.date}}</td>
+      </tr>
+      {%endfor%}
+    
+    </tbody>
+  </table>
+</div>
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  </script>
+</body>
+</html>

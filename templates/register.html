@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Admin home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename ='css/style.css')}}">
+  </head>
+    <body class="reg">
+     
+
+      <div class="topnav" id="myTopnav">
+        <a href="{{url_for('register')}}" style ="text-decoration: none;color:bisque">Add new staff</a>
+        <a href="{{url_for('qrGenerate')}}" style ="text-decoration: none;color:bisque">Generate QR code</a>
+        <a href="{{url_for('adminclass')}}" style ="text-decoration: none;color:bisque">View Classroom</a>
+        <a href="{{url_for('viewStaff')}}" style ="text-decoration: none;color:bisque">Staff Details</a>
+        <a href="{{url_for('viewUsers')}}" style ="text-decoration: none;color:bisque">User Details</a>
+        <a href="{{url_for('admin_logout')}}" style ="text-decoration: none;color:bisque">Logout</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+        {% with messages = get_flashed_messages()%}
+          {% if messages %}
+              {% for msg in messages %}
+              <div class="alert alert-primary" role="alert">
+                 {{msg}}
+              </div>
+              {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div class="registration">
+          <h1>Register</h1>
+        <form method="POST" action="/register">
+            <div>
+              <p class="para">Email address</p>
+              <input type="text" aria-describedby="emailHelp" name="Email" placeholder="Email address">
+            </div>
+            <div >
+              <p class="para">Enter password</p>
+              <input type="text" name="password" placeholder="Password">
+            </div>
+            <div >
+              <p class="para">Enter first name</p>
+                <input type="text" name="Fname" placeholder="First name">
+              </div>
+              <div >
+                <p class="para">Enter Last name</p>
+                <input type="text" name="Lname" placeholder="Last name">
+              </div>
+              <div >
+                <p class="para">Department Name</p>
+                <input type="text" name="dept" placeholder="Department">
+              </div>
+              <button type="submit">Register</button>
+          </form>
+        </div>
+    </body>
+</html>

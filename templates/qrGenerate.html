@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Admin home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename ='css/style.css')}}">
+  </head>
+    <body class="qrdetails">
+      <div class="topnav" id="myTopnav">
+        <a href="{{url_for('register')}}" style ="text-decoration: none;color:bisque">Add new staff</a>
+        <a href="{{url_for('qrGenerate')}}" style ="text-decoration: none;color:bisque">Generate QR code</a>
+        <a href="{{url_for('adminclass')}}" style ="text-decoration: none;color:bisque">View Classroom</a>
+        <a href="{{url_for('viewStaff')}}" style ="text-decoration: none;color:bisque">Staff Details</a>
+        <a href="{{url_for('viewUsers')}}" style ="text-decoration: none;color:bisque">User Details</a>
+        <a href="{{url_for('admin_logout')}}" style ="text-decoration: none;color:bisque">Logout</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+      {% with messages = get_flashed_messages()%}
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-primary" role="alert">
+                 {{msg}}
+            </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <p style="text-align:center;"class="heading">Generate new QR code</p>
+      <br><br>
+        <div class="qrentry">
+          <form action="/qrGenerate" method="post">
+              <label for="roomno" style="color:white;">Enter Room Number:</label>
+              <input type="text" class="roomno" name="RoomNumber"><br><br>
+              <button class="qrbutton"type="submit" value="Submit">Submit</button>
+          </form>
+          </div>
+    </body>
+</html>
