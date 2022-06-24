@@ -1,4 +1,4 @@
-#!C:\projectQR\virtual\Scripts\python.exe
+#!C:\Users\chait\Desktop\QRProject-2022\virtual\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'qrcode==7.3.1','console_scripts','qr'
 import re
 import sys

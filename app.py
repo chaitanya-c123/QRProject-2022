@@ -29,8 +29,8 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail=Mail(app)
 
-app.config['SECRET_KEY']=os.getenv("SECRET_KEY")
-app.secret_key=os.getenv("secret_key")
+app.config['SECRET_KEY']="thisisasecretkey"
+app.secret_key="hello"
 otp=random.randint(0000,9999)
 
 db=SQLAlchemy(app)
@@ -44,9 +44,9 @@ class Admin(db.Model):
     # def __repr__(self):
     #     return '<Name %r>' % self.username
 
-# passw=os.getenv("pass")
+# passw="admin@123"
 # hashed_password=bcrypt.generate_password_hash(passw)
-# admin=Admin(username=os.getenv("user"),password=hashed_password)
+# admin=Admin(username="chaitanyamc001@gmail.com",password=hashed_password)
 # db.session.add(admin)
 # db.session.commit()
 class room(db.Model):
@@ -131,6 +131,7 @@ def userLogin():
     
         except:
             flash("Failed to get record from MySQL table: ")
+            return redirect(url_for("userLogin"))
     return render_template('login.html',text="userLogin") 
 
 
@@ -140,23 +141,19 @@ def adminLogin():
     if request.method=="POST":
         user=request.form["email"]
         passw=request.form["password"]
-        try:
-            res=Admin.query.filter_by(username=user).first()
-            if res:
-                if res.username==user:
-                    if bcrypt.check_password_hash(res.password, passw):
-                        session["admin"]=True
-                        return redirect(url_for('viewUsers')) 
-                    else:
-                        flash("Wrong Password!!")
-                        return redirect(url_for("adminLogin"))
-            else:
-                flash("No such username exists!!")
-                return redirect(url_for('adminLogin'))     
-        
-        except:
-            print("Failed to get record from MySQL table: ")
-
+        res=Admin.query.filter_by(username=user).first()
+        if res:
+            if res.username==user:
+                if bcrypt.check_password_hash(res.password, passw):
+                    session["admin"]=True
+                    return redirect(url_for('viewUsers')) 
+                else:
+                    flash("Wrong Password!!")
+                    return redirect(url_for("adminLogin"))
+        else:
+            flash("No such username exists!!")
+            return redirect(url_for('adminLogin'))     
+    
     return render_template('login.html',text="adminLogin") 
 
 
@@ -325,7 +322,6 @@ def exit():
             else:
                 rno=room_no[0]
                 room_no[0]=0
-                rno="305"
                 res=room.query.filter_by(room_number=rno).first()
                 curDt=datetime.now()
                 time = curDt.strftime("%H:%M:%S")
@@ -478,7 +474,7 @@ def adminclass():
         else:
             return render_template("adminclass.html",room=res)
     else:
-        return redirect(url_for("adminLogin"))
+        return redirect(url_for("index_"))
 
 @app.route('/logout',methods=["POST","GET"])
 def user_logout():
@@ -488,7 +484,7 @@ def user_logout():
 @app.route('/Admin_logout',methods=["POST","GET"])
 def admin_logout():
     session.pop("admin",None)
-    return redirect(url_for("adminLogin"))
+    return redirect(url_for("index_"))
 
 
 

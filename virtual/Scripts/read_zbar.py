@@ -1,4 +1,4 @@
-#!C:\projectQR\virtual\Scripts\python.exe
+#!C:\Users\chait\Desktop\QRProject-2022\virtual\Scripts\python.exe
 from __future__ import print_function
 
 import argparse
