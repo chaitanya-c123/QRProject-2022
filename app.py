@@ -18,7 +18,8 @@ app= Flask(__name__)
 bcrypt=Bcrypt(app)
 sched = BackgroundScheduler({'apscheduler.timezone': 'Asia/Calcutta'})
 load_dotenv()
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///qrproject.db'
+# app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///qrproject.db'
+app.config['SQLALCHEMY_DATABASE_URI']='postgres://kjplzzmxegvbma:f0f55fa9db0311e620f0dd409763abff1b26f3f685c494fe1b6ff44ea559586c@ec2-54-165-184-219.compute-1.amazonaws.com:5432/d9pbap4tvvmhp2'
 
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
